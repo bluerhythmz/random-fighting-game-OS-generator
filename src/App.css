@@ -78,6 +78,11 @@ input {
   margin-top: 1rem;
 }
 
+.error {
+  font-size: 1.6rem;
+  color: red;
+}
+
 .excuse-box {
   margin-top: 3rem;
 }
@@ -106,5 +111,9 @@ input {
   .settings {
     justify-content: space-around;
     flex-direction: row;
+  }
+
+  .error {
+    font-size: 2.6rem;
   }
 }

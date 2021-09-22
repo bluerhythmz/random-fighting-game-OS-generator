@@ -4,6 +4,7 @@ import "./App.css";
 function App() {
   const [excuse, setExcuse] = useState("");
   const [gameLength, setGameLength] = useState(2);
+  const [error, setError] = useState("")
 
   const fightingGameArr = [
     "Under ",
@@ -99,13 +100,16 @@ function App() {
   };
 
   const handleClick = () => {
+    if (gameLength < 2 || gameLength > 10) {
+      return setError("Game Length must be greater than 1 and less than 11")
+    }
     setExcuse(randomExcuse + randomGameName() + randomNumber);
     randomExcuse = excuses[Math.floor(Math.random() * excuses.length)];
+    setError("")
   };
 
   const handleChange = (e) => {
     const value = e.target.value;
-    if (value < 2 || value > 10) return;
     setGameLength(value);
   };
 
@@ -116,12 +120,14 @@ function App() {
         <div className="input-box">
           <label htmlFor="length">Game Name Length:</label>
           <input
-            type="number"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            type="text"
+            name="length"
             onChange={handleChange}
             value={gameLength}
-            name="length"
-            id="game-length"
-          />
+          ></input>
+          <p className="error">{error}</p>
         </div>
         <button onClick={handleClick}>Generate</button>
       </div>
